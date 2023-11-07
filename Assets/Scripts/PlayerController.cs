@@ -15,11 +15,16 @@ public class PlayerController : MonoBehaviour
     private float powerupStrength = 15.0f;
     public GameObject powerupIndicator;
     public ParticleSystem powerupParticle;
+    public AudioClip contactSound;
+    public AudioSource backgroundAudio;
+    public AudioClip jumpSound;
+    public AudioSource playerAudio;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        playerAudio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -38,6 +43,7 @@ public class PlayerController : MonoBehaviour
         {
             isOnGround = false;
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            playerAudio.PlayOneShot(jumpSound);
         }
 
     }
@@ -56,6 +62,7 @@ public class PlayerController : MonoBehaviour
             Destroy(collision.gameObject);
             StartCoroutine(PowerupCountdownRoutine());
             powerupParticle.Play();
+            playerAudio.PlayOneShot(contactSound);
         }
         if (collision.gameObject.CompareTag("Enemy") && hasPowerup)
         {
