@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     public AudioSource backgroundAudio;
     public AudioClip jumpSound;
     public AudioSource playerAudio;
+    public AudioClip powerupSound;
 
     // Start is called before the first frame update
     void Start()
@@ -62,7 +63,7 @@ public class PlayerController : MonoBehaviour
             Destroy(collision.gameObject);
             StartCoroutine(PowerupCountdownRoutine());
             powerupParticle.Play();
-            playerAudio.PlayOneShot(contactSound);
+            playerAudio.PlayOneShot(powerupSound);
         }
         if (collision.gameObject.CompareTag("Enemy") && hasPowerup)
         {
@@ -71,6 +72,10 @@ public class PlayerController : MonoBehaviour
 
             Debug.Log("Collided with:" + collision.gameObject.name + "with powerup set to" + hasPowerup);
             enemyRigidbody.AddForce(awayFromPlayer * powerupStrength, ForceMode2D.Impulse);
+
+            playerAudio.PlayOneShot(contactSound);
+
+
         }
         
     }
