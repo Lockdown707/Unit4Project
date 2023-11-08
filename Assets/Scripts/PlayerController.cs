@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     public float speed;
     public bool hasPowerup;
     private float powerupStrength = 15.0f;
-    public GameObject powerupIndicator;
+    //public GameObject powerupIndicator;
     public ParticleSystem powerupParticle;
     public AudioClip contactSound;
     public AudioSource backgroundAudio;
@@ -40,7 +40,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && isOnGround == true)
+        if (Input.GetButtonDown("Jump") && isOnGround == true)
         {
             isOnGround = false;
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
@@ -59,7 +59,7 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Powerup"))
         {
             hasPowerup = true;
-            powerupIndicator.gameObject.SetActive(true);
+            //powerupIndicator.gameObject.SetActive(true);
             Destroy(collision.gameObject);
             StartCoroutine(PowerupCountdownRoutine());
             powerupParticle.Play();
@@ -87,7 +87,7 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(7);
         hasPowerup = false;
-        powerupIndicator.gameObject.SetActive(false);
+        //powerupIndicator.gameObject.SetActive(false);
         powerupParticle.Stop();
     }
 }
