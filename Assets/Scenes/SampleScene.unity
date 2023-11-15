@@ -196,7 +196,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 71.05817, y: 39.50655}
+  m_Size: {x: 139.97884, y: 109.4606}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -210,7 +210,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 205585744}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.9646, y: 5.0101, z: 0}
+  m_LocalPosition: {x: 6.7578, y: 1.3845, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1561,6 +1561,8 @@ MonoBehaviour:
   jumpSound: {fileID: 8300000, guid: 6dd3f6af73a39fb429b0e8fcc368f644, type: 3}
   playerAudio: {fileID: 1642022618}
   powerupSound: {fileID: 8300000, guid: 67c265873238dae4ab5c41e60345d451, type: 3}
+  deathHeight: -15
+  deathSound: {fileID: 8300000, guid: 047b2d26fcf979549853579b6881cf09, type: 3}
 --- !u!199 &1642022616
 ParticleSystemRenderer:
   serializedVersion: 6

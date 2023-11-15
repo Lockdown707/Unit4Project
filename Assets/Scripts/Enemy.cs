@@ -7,6 +7,7 @@ public class Enemy : MonoBehaviour
     public float speed;
     private Rigidbody2D enemyRb;
     private GameObject player;
+    public float deathHeight = -15;
 
     // Start is called before the first frame update
     void Start()
@@ -21,7 +22,7 @@ public class Enemy : MonoBehaviour
         Vector2 lookDirection = (player.transform.position - transform.position).normalized;
         enemyRb.AddForce(lookDirection * speed);
 
-        if (transform.position.y < -10)
+        if (transform.position.y < deathHeight)
         {
             Destroy(gameObject);
         }

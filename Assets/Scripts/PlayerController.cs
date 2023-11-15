@@ -1,8 +1,10 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -20,6 +22,8 @@ public class PlayerController : MonoBehaviour
     public AudioClip jumpSound;
     public AudioSource playerAudio;
     public AudioClip powerupSound;
+    public float deathHeight = -15;
+    public AudioClip deathSound;
 
     // Start is called before the first frame update
     void Start()
@@ -45,6 +49,10 @@ public class PlayerController : MonoBehaviour
             isOnGround = false;
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             playerAudio.PlayOneShot(jumpSound);
+        }
+        if (transform.position.y < deathHeight)
+        {
+            StartCoroutine(Die());
         }
 
     }
@@ -89,5 +97,21 @@ public class PlayerController : MonoBehaviour
         hasPowerup = false;
         //powerupIndicator.gameObject.SetActive(false);
         powerupParticle.Stop();
+    }
+
+    public void ResetScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    IEnumerator Die()
+    {
+        playerAudio.PlayOneShot(deathSound);
+        GameObject.Find("CM vcam1").GetComponent<CinemachineVirtualCamera>().Follow = null;
+        GameObject.Find("CM vcam1").GetComponent<CinemachineVirtualCamera>().LookAt = null;
+
+
+        yield return new WaitForSeconds(5);  
+        ResetScene();
     }
 }
